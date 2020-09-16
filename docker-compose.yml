@@ -1,0 +1,32 @@
+version: '3'
+services:
+  mission1:
+    image: jupyter/datascience-notebook
+    container_name: jupyter
+    hostname: jupyter
+    ports:
+      - "8889:8888"
+    command: start-notebook.sh --NotebookApp.token=''
+    volumes:
+      - ./:/home/jovyan/work
+
+  mongo:
+    image: mongo
+    container_name: mongodb
+    hostname: mongodb
+    volumes:
+      - ./mongodb:/data/db
+    restart: always
+    expose:
+      - 27017
+    ports:
+      - "27017:27017"
+  adminmongo:
+    image: mrvautin/adminmongo
+    container_name: adminmongo
+    hostname: adminmongo
+    ports:
+      - "1234:1234"
+    environment:
+      - HOST=0.0.0.0
+
