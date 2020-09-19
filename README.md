@@ -517,11 +517,16 @@ history > a.txt
 ```js
 指令 2> a.txt
 ```
-* 
-
-
-
-
+* 將兩種結果分開儲存
+```js
+指令 > correct.log 2>error.log
+```
+## pipe 管線
+* 把前一個stdout當成後一個指令的stdin
+  * 計算passwd檔案的錢時行的字數
+    ```js
+    head /etc/passwd | wc -w
+    ```
 
 
 
