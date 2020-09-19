@@ -383,23 +383,30 @@
 * 印出環境變數PATH 的值
   * `echo $PATH`
 ## which 指令 (顯示指令位置)
-* `which 指令`
+```js
+which 指令
+``` 
 ## `type 指令` : 顯示指令類型 ， `file 檔案` : 顯示檔案類型  
-    ```js
-    type cp
-    ``` 
-    ```js
-    type ll
-    ```  
-    ```js
-    type cd
-    ``` 
-    ```js
-    file /etc/passwd
-    ``` 
-    ```js
-    file /bin/cp
-    ``` 
+```js
+type cp
+``` 
+
+```js
+type ll
+```  
+
+```js
+type cd
+``` 
+
+```js
+file /etc/passwd
+``` 
+
+```js
+file /bin/cp
+``` 
+    
 ## alias 自定義指令
 * 暫時把clear指令指定成cl(clear還是可以使用)
     ```js
