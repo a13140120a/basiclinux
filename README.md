@@ -570,6 +570,84 @@ sort -n file1
 ```js
 sort -n -k 2 file1
 ```  
+## 檔案分割(split)與合併(cat)
+* 先產生範例檔案
+```js
+seq 1 99 > demo.txt
+```  
+* 對檔案進行分割(會依序產生xaa,xab,xac,xad四個檔案)
+```js
+split -l 30 demo.txt
+```  
+* 檔案內容上下合併
+```js
+cat xaa xab > demo2.txt
+```  
+## 檔案內容左右合併(paste/join)
+* a.txt  
+ |tom|100|  
+ |mary|89|  
+ |jojo|60|  
+* b.txt  
+ |tom|A|  
+ |mary|B|  
+ |jojo|D|  
+ |jan|F|  
+* `paste a.txt b.txt`  
+ |tom|100|tom|A|  
+ |mary|89|mary|B|  
+ |jojo|60|jojo|D|  
+ |   |   |jan|F|  
+ * `join a.txt b.txt`
+ |tom|100|A|
+ |mary|89|B|
+ |jojo|60|D|
+## cut 剪切文字內容
+
+|參數|說明|
+| --- | --- |
+|-c 字元|依字元抓取|
+|-f 數字N|取出第N筆欄位，左起由1算起|
+|-d 分隔符號|預設是tab，但若為空白時可以用單引號，如 -d ""|
+
+* 抓取第1至第10個字元
+```js
+ls -l |cut -c 1-10
+```  
+* 以空白分隔，抓取第三欄
+```js
+ls -l | cut ' ' -f 3
+```  
+* 以:為分隔，抓取第2欄
+```js
+echo $PATH |cut -d : -f 2
+```  
+## tr 取代文字
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
