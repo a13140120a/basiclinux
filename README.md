@@ -527,11 +527,22 @@ history > a.txt
     ```js
     head /etc/passwd | wc -w
     ```
-
-
-
-
-
+# tee 同時將資料流分送到螢幕及檔案
+* 螢幕及檔案都有hello
+```js
+echo hello | tee log.txt (會覆寫)
+```
+```js
+echo hello | tee -a log.txt (不會覆寫)
+```
+# 嵌入指令
+```js
+docker stop `docker ps -aq`
+```  
+或者
+```js
+docker stop $(docker ps -aq)
+```  
 
 
 
