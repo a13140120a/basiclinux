@@ -583,7 +583,7 @@ split -l 30 demo.txt
 ```js
 cat xaa xab > demo2.txt
 ```  
-## 檔案內容左右合併(paste/join)
+## 檔案內容左右合併(paste(分隔符號-d)/join(分隔符號-))
 * a.txt  
  |tom|100|  
  |mary|89|  
@@ -599,9 +599,9 @@ cat xaa xab > demo2.txt
  |jojo|60|jojo|D|  
  |   |   |jan|F|  
  * `join a.txt b.txt`
- |tom|100|A|
- |mary|89|B|
- |jojo|60|D|
+ |tom|100|A|  
+ |mary|89|B|  
+ |jojo|60|D|  
 ## cut 剪切文字內容
 
 |參數|說明|
@@ -623,15 +623,21 @@ ls -l | cut ' ' -f 3
 echo $PATH |cut -d : -f 2
 ```  
 ## tr 取代文字
- 
+* `-s` 壓縮所有重複出現(連在一起)的字元 並且取代  
+* `-d` 刪除字元  
+* ex:
+  * 壓縮所有重複的英文字母小寫為一個(root ->rot,spool ->spol)，並變成大寫
+   ```js
+   tr -s "[a-z]" "[A-Z]"
+   ```
+  * 刪除冒號
+   ```js
+   tr -d ":"   (可以不用引號)
+   ```
+## awk 
+(弱弱的，暫時還沒想要碰)
 
-
-
-
-
-
-
-
+## sed 搜尋即取代
 
 
 
