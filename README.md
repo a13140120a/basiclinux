@@ -623,7 +623,7 @@ ls -l | cut ' ' -f 3
 echo $PATH |cut -d : -f 2
 ```  
 ## tr 取代文字
-
+ 
 
 
 
