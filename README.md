@@ -8,15 +8,15 @@
 
 * 切換回圖形介面
 
-  * ctrl + alt + F1
+  * `ctrl + alt + F1`
 
 * 登出
 
-  * exit or logout  
+  * `exit or logout`
 * 正常終止
-  * ctrl + d
+  * `ctrl + d`
 * 非正常終止
-  * ctrl + c
+  * `ctrl + c`
 
 # linux系統目錄
 
@@ -375,15 +375,36 @@
   * `-l`  :只顯示行數 
   * `-w`  :只顯示字數 
   * `-c`  :只顯示byte數 
-
-
-
-
-
-
-
-
-
+## echo 字串
+* 印出test
+  * `echo test`
+* 印出test 後不換行
+  * `echo -n test`
+* 印出環境變數PATH 的值
+  * `echo $PATH`
+## which 指令 (顯示指令位置)
+* `which 指令`
+## `type 指令` : 顯示指令類型 ， `file 檔案` : 顯示檔案類型  
+    ```js
+    type cp
+    ``` 
+    ```js
+    type ll
+    ```  
+    ```js
+    type cd
+    ``` 
+    ```js
+    file /etc/passwd
+    ``` 
+    ```js
+    file /bin/cp
+    ``` 
+## alias
+* 把clear指令指定成cl(clear還是可以使用)
+    ```js
+    alias cl="clear"
+    ``` 
 
 
 
