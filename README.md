@@ -1,4 +1,4 @@
-# *linux(centos7) 指令整理*
+# **linux(centos7) 指令整理**
 
 ## 切換介面
 
@@ -527,7 +527,7 @@ history > a.txt
     ```js
     head /etc/passwd | wc -w
     ```
-# tee 同時將資料流分送到螢幕及檔案
+## tee 同時將資料流分送到螢幕及檔案
 * 螢幕及檔案都有hello
 ```js
 echo hello | tee log.txt (會覆寫)
@@ -535,25 +535,41 @@ echo hello | tee log.txt (會覆寫)
 ```js
 echo hello | tee -a log.txt (不會覆寫)
 ```
-# 嵌入指令
+## 嵌入指令
 ```js
-docker stop `docker ps -aq`
+docker stop `docker ps -aq`  (停止所有docker 容器)
 ```  
 或者
 ```js
 docker stop $(docker ps -aq)
 ```  
-
-
-
-
-
-
-
-
-
-
-
+## seq 產生序列數字
+* 產生1到11，等差為2，對齊補零`-w` 的序列
+```js
+seq -w 1 2 11  (產生01,03,05,07,09,11)
+```  
+## sort 排序
+|參數|說明|
+| --- | --- |
+|-r|反向(由小到大)|
+|-n|依數值由小到大(20會排在132前面)，沒有則會排在後面|
+|-M|以月分排序|
+|-f|忽略大小寫|
+|-u|過濾重複資料|
+|-t 分隔符號|欄位分割符號|
+|-k 數字|依第幾個欄位排序|
+* 字典排序，100會排在94前面
+```js
+sort file1 
+```  
+* 數值排序，94會排在100前面
+```js
+sort -n file1
+```  
+* 依第2個欄位數值排序
+```js
+sort -n -k 2 file1
+```  
 
 
 
