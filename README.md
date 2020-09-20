@@ -17,7 +17,16 @@
   * ## [find](#021) #
   * ## [>: 資料流倒出符號](#022) #
   * ## [pipe,tee](#023) #
-  
+  * ## [seq, sort](#024) #
+  * ## [split , cat](#025) #
+  * ## [paste , join](#026) #
+  * ## [cut](#027) #
+  * ## [tr](#028) #
+  * ## [awk](#029) #
+  * ## [sed](#030) #
+  * ## [grep](#031) #
+  * ## [vi](#032) #
+
  ------
 <h2 id="001">切換介面Shell</h2>  
 
@@ -539,8 +548,10 @@ locate "*.img"
     ```js
     find /tmp/ -type f -name "*.txt" -exec cp {} ~ \;
     ```
-<h2 id="022"> </h2>  
-## `>`: 資料流倒出符號
+<h2 id="022">資料流倒出符號</h2>  
+
+## `>`: 
+
 |符號| 說明 |
 |--- | --- |
 |> | 重導stdout，覆蓋原始內容(不會導入錯誤，會顯示出來)|
@@ -585,13 +596,15 @@ docker stop `docker ps -aq`  (停止所有docker 容器)
 ```js
 docker stop $(docker ps -aq)
 ```  
+<h2 id="024">seq 產生序列數字</h2>  
 
-## seq 產生序列數字
 * 產生1到11，等差為2，對齊補零`-w` 的序列
 ```js
 seq -w 1 2 11  (產生01,03,05,07,09,11)
 ```  
+
 ## sort 排序
+
 |參數|說明|
 | --- | --- |
 |-r|反向(由小到大)|
@@ -613,7 +626,8 @@ sort -n file1
 ```js
 sort -n -k 2 file1
 ```  
-## 檔案分割(split)與合併(cat)
+<h2 id="025"> 檔案分割(split)與合併(cat)</h2>  
+
 * 先產生範例檔案
 ```js
 seq 1 99 > demo.txt
@@ -626,26 +640,39 @@ split -l 30 demo.txt
 ```js
 cat xaa xab > demo2.txt
 ```  
-## 檔案內容左右合併(paste(分隔符號-d)/join(分隔符號-))
+<h2 id="026"> 檔案內容左右合併(paste(分隔符號-d)/join(分隔符號-))</h2>  
+
 * a.txt  
+
  |tom|100|  
+ | --- | --- |
  |mary|89|  
  |jojo|60|  
+ 
 * b.txt  
+
  |tom|A|  
+  | --- | --- |
  |mary|B|  
  |jojo|D|  
  |jan|F|  
+ 
 * `paste a.txt b.txt`  
+
  |tom|100|tom|A|  
+  | --- | --- | --- | --- |
  |mary|89|mary|B|  
  |jojo|60|jojo|D|  
- |   |   |jan|F|  
+ |(none)|(none)|jan|F|  
+ 
  * `join a.txt b.txt`
+ 
  |tom|100|A|  
+  | --- | --- | --- |
  |mary|89|B|  
  |jojo|60|D|  
-## cut 剪切文字內容
+ 
+ <h2 id="027">cut 剪切文字內容</h2>  
 
 |參數|說明|
 | --- | --- |
@@ -665,7 +692,8 @@ ls -l | cut ' ' -f 3
 ```js
 echo $PATH |cut -d : -f 2
 ```  
-## tr 取代文字
+<h2 id="028">tr 取代文字</h2>  
+
 * `-s` 壓縮所有重複出現(連在一起)的字元 並且取代  
 * `-d` 刪除字元  
 * ex:
@@ -677,13 +705,17 @@ echo $PATH |cut -d : -f 2
    ```js
    tr -d ":"   (可以不用引號)
    ```
-## awk 
+<h2 id="029">awk</h2>  
+
 (弱弱的，暫時還沒想要碰)
 
-## sed 搜尋即取代
+<h2 id="030">sed 搜尋即取代</h2> 
 
 
+<h2 id="031">grep</h2> 
 
+
+<h2 id="032">vi</h2> 
 
 
 
