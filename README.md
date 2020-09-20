@@ -691,7 +691,8 @@ ls -l | cut ' ' -f 3
 * 以:為分隔，抓取第2欄
 ```js
 echo $PATH |cut -d : -f 2
-```  
+```    
+
 <h2 id="028">tr 取代文字</h2>  
 
 * `-c` 不要的字串(黑名單)  
@@ -719,15 +720,16 @@ echo $PATH |cut -d : -f 2
 
 * 使用方法  
 ```js
-awk -F '{pattern   action}' filename
+awk -F '{pattern   action}' filename   注意:大括號{}必須要使用單引號包起來!
 ```  
 |字元|說明|
 | --- | --- |
 |`-F` |設定分隔符號|
 | `{print $1}` |代表印出第一欄 , `$0` 代表印出整列(橫)|  
 |`~` |代表包含，而`!~` 代表不包含 | 
-| `NR` |代表輸出內容的第幾列列  |
+| `NR` |代表輸出內容的第幾列  |
 | `NF` |代表有幾欄|  
+|`FS`|設定分隔符號，預設為空白建|
 | `/match_pattern/` |以兩條斜線中間代表正規表示法，印出符合條件的字元|  
 ```JS
 awk '{/match_pattern/print $1}' filename.txt
@@ -748,10 +750,85 @@ awk -F, '$1 !~ /Deepak/' file
 * 更多詳細資訊:
   * [https://codertw.com/%E5%89%8D%E7%AB%AF%E9%96%8B%E7%99%BC/392291/](https://codertw.com/%E5%89%8D%E7%AB%AF%E9%96%8B%E7%99%BC/392291/)  
   * [https://noootown.com/awk-useful-usage/](https://noootown.com/awk-useful-usage/)  
-  
-<h2 id="030">sed 搜尋即取代</h2> 
+  * **鳥哥**: [http://linux.vbird.org/linux_basic/0330regularex.php](http://linux.vbird.org/linux_basic/0330regularex.php)
+<h2 id="030">sed 搜尋及取代</h2> 
 
-<h2 id="031">grep</h2> 
+* 預設顯示修改結果，若加上`-i` 則會直接修改檔案內容
+* 範例:
+  * 將root改成ROOT
+  ```js
+  sed 's/root/ROOT/g' /etc/passwd
+  ```
+  * 將root字串刪除
+  ```js
+   sed 's/root//g' /etc/passwd
+  ```
+  * 印出第5,6,7行
+  ```js
+  sed -n '5,7p' /etc/passwd  
+  ```
+  * 將第2行~第5行刪除
+  ```js
+  sed '2,5d' /etc/passwd 
+  ```
+  * 第二行下面附加"hello"
+  ```js
+  sed '2a hello' /etc/passwd 
+  ```
+  * 替換第2~第5行字串為"hello"
+  ```js
+  sed '2,5c hello' /etc/passwd 
+  ```  
+* #### **更多請參考鳥哥 :** [http://linux.vbird.org/linux_basic/0330regularex.php#sed](http://linux.vbird.org/linux_basic/0330regularex.php#sed)
+  
+<h2 id="031">grep 檔案內搜尋字串</h2> 
+
+* 使用方法 
+```js 
+grep [參數] "pattern" file
+```  
+
+|參數|說明|
+| --- | --- |
+|`-o`|只印出相符的字串|
+|`-n`|印出字串所在的那一行編號(第幾行)|
+|`-H`|印出字串所在的檔案名稱|
+|`-r`|也搜尋子目錄(遞迴)|
+|`-v`|反向選擇(排除)|
+|`-i`|不區分大小寫|
+|`-l`|內容符合指定樣式的檔名|
+|`-L`|內容不符合指定樣式的檔名|
+|`-w`|需全字相符|
+|`-c`|印出結果的總行數|
+|`-s`|不顯示錯誤訊息|
+|`-m`+N|只列出前N個|
+|`-A`+N|印出後N行|
+|`-B`+N|印出前N行|  
+
+* 範例 
+  * 顯示/etc/passwd檔案內出現home的地方 (-w只會出現home,若沒有-w則會出現hometown等等單字)
+    ```js
+    grep -n -w "home" /etc/passwd
+    ```
+  * 只印出"home" 不會印出其他字元
+    ```js
+    grep -o "home" /etc/passwd
+    ```
+  * 顯示檔案內含有"home" 字串的行數
+    ```js
+    grep -c "home" /etc/passwd
+    ```
+  * 找出/etc/目錄下含有"home"字串的所有檔案
+    ```js
+    grep -H "home" /etc/*
+    ```
+  * 列出指令記錄內出現"is"字串的紀錄
+    ```js
+    history | grep "is"
+    ```
+* #### **更多請參考鳥哥 :** [http://linux.vbird.org/linux_basic/0330regularex/0330regularex-fc4.php#grep](http://linux.vbird.org/linux_basic/0330regularex/0330regularex-fc4.php#grep)
+
+
 
 <h2 id="032">vi</h2> 
 
