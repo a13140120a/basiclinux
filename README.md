@@ -846,4 +846,3 @@ grep [參數] "pattern" file
 
 
 
-
