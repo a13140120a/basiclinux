@@ -1,10 +1,27 @@
-# **linux(centos7) 目錄**
-
-
- 
+# **linux(centos7) 入門攻略**  
+* # 目錄  
+  * ## [切換介面](#001) #
+  * ## [系統目錄](#002) #
+  * ## [基本指令操作(cal、pwd、whoami、--help)](#003) #
+  * ## [cd, ls](#004) #
+  * ## [清除畫面(clear,reset)](#006) #
+  * ## [history](#007) #
+  * ## [shell 萬用字元(wildcard)](#008) #
+  * ## [mkdir,rmdir](#009) #
+  * ## [touch,rm,cp](#011) #
+  * ## [cat,head,tail](#015) #
+  * ## [du,df](#017) #
+  * ## [echo,wc](#018) #
+  * ## [which,type,file](#019) #
+  * ## [alias](#020) #
+  * ## [find](#021) #
+  * ## [>: 資料流倒出符號](#022) #
+  * ## [pipe,tee](#023) #
+  
+ ------
 <h2 id="001">切換介面Shell</h2>  
 
-## [切換介面](#001)
+
 
 * **切換文字介面**
 
@@ -22,7 +39,7 @@
 * **非正常終止**
   * `ctrl + c`
 
-## linux系統目錄
+<h2 id="002">linux系統目錄</h2>  
 
 * **/home:家目錄**  
 
@@ -50,8 +67,8 @@
 
 * **/opt:作為OPTIONAL檔案漢城式的存放目錄，例如非預設安裝的外來軟體常會安裝於此**
 
-
-## 基本指令操作  
+<h2 id="003">基本指令操作</h2>  
+  
 * 以`.`表示當前目錄`..`表示上層目錄  
 * 印出當前帳號  
     ```js
@@ -77,8 +94,10 @@
     ```js
     (指令) --help
     ```
-* 將檔案或目錄名稱前加上 `.` 會變成隱藏檔
-## cd
+* 將檔案或目錄名稱前加上 `.` 會變成隱藏檔  
+
+<h1 id="004">cd</h1>  
+
   * 切換至根目錄
     ```js
     cd /
@@ -99,7 +118,8 @@
     ```js
     cd -
     ```
-## ls  
+<h1 id="005">ls</h1>  
+
   * 以詳細資訊方式顯示 
     ```js
     ls -l
@@ -129,7 +149,8 @@
     ls -t
     ```
   * 
-## 清除畫面
+<h2 id="006">清除畫面(clear,reset)</h2>  
+
 * 可以往上捲動  
     ```js
     clear
@@ -138,7 +159,8 @@
     ```js
     reset
     ```
-## history
+<h2 id="007">history</h2>  
+
 * 列出所有指令紀錄
     ```js
     history
@@ -171,7 +193,8 @@
     ```js
     !-6
     ```
-## shell 萬用字元(wildcard)
+<h2 id="008">shell 萬用字元(wildcard)</h2>  
+
   * `*`:  比對0個以上任意字元  
     ```js
     c*   表以c開頭所有字元
@@ -199,7 +222,8 @@
     ```js
     cp {*.txt,*.jpg} /tmp   表示將所有txt及jpg檔複製到/tmp目錄下
     ```    
-## mkdir 創建目錄
+<h2 id="009">mkdir 創建目錄</h2>  
+
 * `-p` 自動產生路徑串中尚未存在的目錄  
 * 於當前目錄建立 dir1
     ```js
@@ -221,13 +245,15 @@
     ```js
     mkdir /tmp/dir4 dir5 /tmp/dir4/a4
     ```  
-## rmdir 刪除空目錄(非空目錄不會被刪除)
+<h2 id="010">rmdir 刪除空目錄(非空目錄不會被刪除)</h2>  
+
 * `-p` 一次刪除階層式空目錄
 * 只會刪除空目錄d3
     ```js
     rmdir d1/d2/d3
     ```  
-## touch 建立檔案/更改時間戳記 (不會建立絕對路徑相同的檔案或目錄)
+<h2 id="011">touch 建立檔案/更改時間戳記 (不會建立絕對路徑相同的檔案或目錄)</h2>  
+
 * 新增file1
     ```js
     touch file1
@@ -252,7 +278,8 @@
     ```js
     touch dir1
     ``` 
-## rm  刪除
+<h2 id="012">rm 刪除</h2>  
+
 * `-i`: 互動模式(刪除前會向使用者確認)
     ```js
     rm -i file1
@@ -266,7 +293,8 @@
     ```js
     rm -fr --no-preserve-root /
     ``` 
-## cp 複製  
+<h2 id="013">cp 複製</h2>  
+
 * 參數
   * `-r`:  遞迴複製
   * `-p`:  連同檔案屬性一起複製
@@ -295,7 +323,8 @@
     ```js
     cp -u file1 file3
     ``` 
-## mv 移動(更名)
+<h2 id="014">mv 移動(更名)</h2>  
+
 * mv 參數
   * `-i` 目標已存在時，會向使用者確認
   * `-f` 強制直接覆寫
@@ -310,7 +339,8 @@
     ```js
     mv /tmp/file .
     ``` 
-## cat 顯示檔案內容
+<h2 id="015">cat 顯示檔案內容</h2>  
+
 * 顯示file內容
     ```js
     cat file
@@ -327,7 +357,8 @@
     ```js
     tac file
     ``` 
-## head  
+<h2 id="016">head</h2>  
+
 * 預設顯示前10行
     ```js
     head file1
@@ -353,7 +384,8 @@
     ```js
     tail -n +50 file1
     ``` 
-## du 顯示目錄的磁碟用量
+<h2 id="017">du 顯示目錄的磁碟用量</h2>  
+
 * 易懂方式呈現
     ```js
     du -h
@@ -371,6 +403,15 @@
     ```js
     df -h
     ``` 
+<h2 id="018">echo 字串</h2>  
+
+* 印出test
+  * `echo test`
+* 印出test 後不換行
+  * `echo -n test`
+* 印出環境變數PATH 的值
+  * `echo $PATH`  
+
 ## wc 計算字數、行數、byte
 * 印出當前目錄下.bashrc的行數、字數、byte數
     ```js
@@ -378,15 +419,9 @@
     ``` 
   * `-l`:  只顯示行數 
   * `-w`:  只顯示字數 
-  * `-c`:  只顯示byte數 
-## echo 字串
-* 印出test
-  * `echo test`
-* 印出test 後不換行
-  * `echo -n test`
-* 印出環境變數PATH 的值
-  * `echo $PATH`
-## which 指令 (顯示指令位置)
+  * `-c`:  只顯示byte數   
+<h2 id="019">which 指令 (顯示指令位置)</h2>  
+
 ```js
 which 指令
 ``` 
@@ -410,8 +445,8 @@ file /etc/passwd
 ```js
 file /bin/cp
 ``` 
-    
-## alias 自定義指令
+<h2 id="020">alias 自定義指令</h2>  
+
 * 暫時把clear指令指定成cl(clear還是可以使用)
     ```js
     alias cl="clear"
@@ -448,7 +483,8 @@ locate -c user1
 ```js
 locate "*.img"
 ``` 
-## find  
+<h2 id="021">find</h2>  
+
 * **翻硬碟搜尋檔案，速度較慢**
 * **搜尋路徑可為多個目錄**
 * **若無指定則預設是搜尋當前目錄及子目錄**
@@ -503,6 +539,7 @@ locate "*.img"
     ```js
     find /tmp/ -type f -name "*.txt" -exec cp {} ~ \;
     ```
+<h2 id="022"> </h2>  
 ## `>`: 資料流倒出符號
 |符號| 說明 |
 |--- | --- |
@@ -525,7 +562,8 @@ history > a.txt
 ```js
 指令 > correct.log 2>error.log
 ```
-## pipe 管線
+<h2 id="023"> pipe 管線</h2>  
+
 * 把前一個stdout當成後一個指令的stdin
   * 計算passwd檔案的錢時行的字數
     ```js
@@ -547,6 +585,7 @@ docker stop `docker ps -aq`  (停止所有docker 容器)
 ```js
 docker stop $(docker ps -aq)
 ```  
+
 ## seq 產生序列數字
 * 產生1到11，等差為2，對齊補零`-w` 的序列
 ```js
