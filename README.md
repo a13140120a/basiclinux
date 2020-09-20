@@ -694,9 +694,10 @@ echo $PATH |cut -d : -f 2
 ```  
 <h2 id="028">tr 取代文字</h2>  
 
+* `-c` 不要的字串(黑名單)  
 * `-s` 壓縮所有重複出現(連在一起)的字元 並且取代  
 * `-d` 刪除字元  
-* ex:
+* ex:  
   * 壓縮所有重複的英文字母小寫為一個(root ->rot,spool ->spol)，並變成大寫
    ```js
    tr -s "[a-z]" "[A-Z]"
@@ -704,16 +705,53 @@ echo $PATH |cut -d : -f 2
   * 刪除冒號
    ```js
    tr -d ":"   (可以不用引號)
+   ```  
+  * 刪除所有非數字字元
+   ```js
+   tr -cd [:digir:]
    ```
+
+* 詳細參考以下連結:
+
+  * [https://www.itread01.com/p/173088.html](https://www.itread01.com/p/173088.html)
+  
 <h2 id="029">awk</h2>  
 
-(弱弱的，暫時還沒想要碰)
+* 使用方法  
+```js
+awk -F '{pattern   action}' filename
+```  
+|字元|說明|
+| --- | --- |
+|`-F` |設定分隔符號|
+| `{print $1}` |代表印出第一欄 , `$0` 代表印出整列(橫)|  
+|`~` |代表包含，而`!~` 代表不包含 | 
+| `NR` |代表輸出內容的第幾列列  |
+| `NF` |代表有幾欄|  
+| `/match_pattern/` |以兩條斜線中間代表正規表示法，印出符合條件的字元|  
+```JS
+awk '{/match_pattern/print $1}' filename.txt
+```  
+* 不印出第一列以及第一  
+```js
+awk 'NR!=1{print $1}' file
+```  
+* 只印含有`root`字元的列
+```js
+$ awk '$0 ~ /root/{print}' file
+```  
 
+* 印第一行不含 `root` 的列  
+```js
+awk -F, '$1 !~ /Deepak/' file 
+```   
+* 更多詳細資訊:
+  * [https://codertw.com/%E5%89%8D%E7%AB%AF%E9%96%8B%E7%99%BC/392291/](https://codertw.com/%E5%89%8D%E7%AB%AF%E9%96%8B%E7%99%BC/392291/)  
+  * [https://noootown.com/awk-useful-usage/](https://noootown.com/awk-useful-usage/)  
+  
 <h2 id="030">sed 搜尋即取代</h2> 
 
-
 <h2 id="031">grep</h2> 
-
 
 <h2 id="032">vi</h2> 
 
