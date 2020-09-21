@@ -836,7 +836,7 @@ grep [參數] "pattern" file
 
 <h2 id="032">vi</h2> 
 
-* 指令模式  
+* 指令模式(:)  
 
 |指令|說明|
 | --- | --- |
@@ -846,6 +846,46 @@ grep [參數] "pattern" file
 |wq或zz或x|存檔並離開|
 |q!|強制離開|
 |5,9w|將第5到9行另存新檔|
+|:set number|顯示行號|
+|:set ignorecase|搜尋不區分大小寫|
+|:set noignorecase|搜尋區分大小寫|
+
+
+
+* 一般模式(esc)
+|指令|說明|
+| --- | --- |
+|0||
+|$||
+|:5或5G||
+|G|移動到最後一行|
+|ggyG|全部複製|
+|ggvG或者ggVG|全選|
+|dG|刪除全部|
+|dd|刪除一整行|
+|dd5|刪除游標位置開始五行|
+|D|從游標位置刪除到末行|
+|6,9d|刪除第6~9行|
+|yy|複製整行|
+|yw|複製游標所在單字|
+|p|貼上(後)|
+|p|貼上(前)|
+|/字串|搜尋字串(按n找下一筆，按N找上一筆)|
+* 編輯vim
+```js
+vim ~/.vimrc
+```  
+
+|指令|說明|
+| --- | --- |
+|set number|顯示行號|
+|syntax on |語法高亮度顯示|
+|set hlsearch|標記搜尋到的字串|
+|set autoindent|自動縮排|
+|set enc=utf8|加入utf8編碼|
+|set ignorecase|搜尋不區分大小寫|
+|set background=dark,light|設定背景顏色|
+
 
 
 
