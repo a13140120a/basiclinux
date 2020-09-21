@@ -854,7 +854,8 @@ grep [參數] "pattern" file
 
 
 
-* 一般模式(esc)
+* 一般模式(esc)  
+
 |指令|說明|
 | --- | --- |
 |0||
@@ -878,7 +879,7 @@ grep [參數] "pattern" file
 vim ~/.vimrc
 ```  
 
-|指令|說明|
+|指令|說明|  
 | --- | --- |
 |set number|顯示行號|
 |syntax on |語法高亮度顯示|
