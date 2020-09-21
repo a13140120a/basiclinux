@@ -30,7 +30,9 @@
   <h2 id="200">目錄(續)</h2> 
 
   * ## [vi](#032) #
-  
+  * ## [shell變數名稱語命名規則](#033) #
+  * ## [shell script(指令稿)](#034)
+  * 
 
  ------
 <h2 id="001">切換介面Shell</h2>  
@@ -784,7 +786,7 @@ awk -F, '$1 !~ /Deepak/' file
   ```js
   sed '2,5c hello' /etc/passwd 
   ```  
-* #### **更多請參考鳥哥 :** [http://linux.vbird.org/linux_basic/0330regularex.php#sed](http://linux.vbird.org/linux_basic/0330regularex.php#sed)
+* #### **鳥哥 :** [http://linux.vbird.org/linux_basic/0330regularex.php#sed](http://linux.vbird.org/linux_basic/0330regularex.php#sed)
   
 <h2 id="031">grep 檔案內搜尋字串</h2> 
 
@@ -831,7 +833,7 @@ grep [參數] "pattern" file
     ```js
     history | grep "is"
     ```
-* #### **更多請參考鳥哥 :** [http://linux.vbird.org/linux_basic/0330regularex/0330regularex-fc4.php#grep](http://linux.vbird.org/linux_basic/0330regularex/0330regularex-fc4.php#grep)
+* #### **鳥哥 :** [http://linux.vbird.org/linux_basic/0330regularex/0330regularex-fc4.php#grep](http://linux.vbird.org/linux_basic/0330regularex/0330regularex-fc4.php#grep)
 
 
 <h2 id="032">vi</h2> 
@@ -864,7 +866,7 @@ grep [參數] "pattern" file
 |dG|刪除全部|
 |dd|刪除一整行|
 |dd5|刪除游標位置開始五行|
-|D|從游標位置刪除到末行|
+|D|從游標位置刪除到行尾|
 |6,9d|刪除第6~9行|
 |yy|複製整行|
 |yw|複製游標所在單字|
@@ -885,6 +887,171 @@ vim ~/.vimrc
 |set enc=utf8|加入utf8編碼|
 |set ignorecase|搜尋不區分大小寫|
 |set background=dark,light|設定背景顏色|
+
+
+<h1 id="033">shell變數命名規則</h1> 
+
+* 檢視所有變數值  
+```js
+export
+```  
+* 印出單一變數值  
+```js
+echo $變數名稱
+```  
+* 設定變數值    
+  * 變數兩邊預設為字串型式  
+  * 等號兩邊不能接空白  
+```js
+var=value
+```
+* 變數值內若需要空白可用單引號或雙引號  
+```js
+name="Coco Lee"
+```  
+* 以下範例，屎用單引號會印出原始字串而非變數值
+```js
+echo $HISTSIZE
+輸出:1000
+echo ${HISTSIZE}
+輸出: 1000
+echo "$HISTSIZE"
+輸出: 1000
+echo '$HISTSIZE'
+輸出: $HISTSIZE
+```
+
+* 印出時雙引號才能保留原始空白
+```js
+name="Coco     Lee"
+echo $name
+輸出: Coco Lee
+echo "$name"
+輸出: Coco     Lee
+```  
+* 移除變數   
+```js
+car="benz"
+unset
+echo $car ->顯示空白
+```
+
+* read 變數名稱:讀取來自鍵盤輸入的變數值
+  * `-p` 向使用者印出提示字串
+  * 範例
+  ```js
+  read -p "input your name:" name
+  輸出input your name:    ->輸入app
+  echo $name
+  輸出: app
+  ```
+* ~/.bashrc 設定只影響該帳號
+* 設定/etc/profile 則會影響全系統
+
+
+<h2 id="034">shell script</h2> 
+
+* `#!bin/bash` 放置於shell開頭的第一行，宣告將用bin/bash來執行
+* 其他以 `#` 開頭的行則為註解
+* `bash test.sh` 使用bash執行指令
+* `chnod a+x test.sh` 權限調整為所有人皆可執行
+* 範例:
+```js 
+#!/bin/bash
+echo "input your name:"
+read username  #輸入資料會存進username
+echo "hello $username"
+```
+* 執行
+```js
+bash test.sh  (設定的變數不會影響原系統)
+```
+或者
+```js
+source test.sh  (設定的變數會影響原系統)
+```
+
+* 指令稿中特殊變數
+`$#` : 參數的個數
+`$0` : 當前腳本名稱
+`$1,$2...`: 分別代表傳進來的第幾個參數
+```js
+bash test.sh a b
+```
+* script 條件判斷式
+```js
+#!/bin/bash
+# Program:
+#       This program shows the user's choice
+# History:
+# 2015/07/16    VBird   First release
+PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
+export PATH
+
+read -p "Please input (Y/N): " yn
+
+if [ "${yn}" == "Y" ] || [ "${yn}" == "y" ]; then
+	echo "OK, continue"
+	exit 0
+fi
+if [ "${yn}" == "N" ] || [ "${yn}" == "n" ]; then
+	echo "Oh, interrupt!"
+	exit 0
+fi
+echo "I don't know what your choice is" && exit 0
+```
+或者
+```js
+#!/bin/bash
+# Program:
+#       This program shows the user's choice
+# History:
+# 2015/07/16    VBird   First release
+PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
+export PATH
+
+read -p "Please input (Y/N): " yn
+
+if [ "${yn}" == "Y" ] || [ "${yn}" == "y" ]; then
+	echo "OK, continue"
+elif [ "${yn}" == "N" ] || [ "${yn}" == "n" ]; then
+	echo "Oh, interrupt!"
+else
+	echo "I don't know what your choice is"
+fi
+```
+* 可用test測試檔案的類型及權限判斷
+  * test -f /home/user1/file1 (用`echo $?`取出結果)
+  * test -f /home/user1/file1 
+  * if [ -r /home/user1/file1 ]; then
+
+* 測試帳號是否存在
+```js 
+#!bin/bash
+read -p "input account:" account
+isexist=$(id"$account")  #將id執行結果存在isexsit中
+
+if [ "$isexist" == "" ]; then
+ echo "not exist" 
+else
+ echo "account exist!!"
+fi
+```
+
+* #### **鳥哥，test :** [http://linux.vbird.org/linux_basic/0340bashshell-scripts.php#test](http://linux.vbird.org/linux_basic/0340bashshell-scripts.php#test)
+* #### **鳥哥，if/then :** [http://linux.vbird.org/linux_basic/0340bashshell-scripts.php#ifthen](http://linux.vbird.org/linux_basic/0340bashshell-scripts.php#ifthen)
+
+* [宣告變數()](http://linux.vbird.org/linux_basic/0320bash.php#declare)
+
+* function
+* #### **鳥哥，test :** [http://linux.vbird.org/linux_basic/0340bashshell-scripts.php#function](http://linux.vbird.org/linux_basic/0340bashshell-scripts.php#function)
+
+
+
+
+
+
+
 
 
 
