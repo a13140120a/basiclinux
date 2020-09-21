@@ -1,5 +1,6 @@
 # **linux(centos7) 入門攻略**  
 * # 目錄  
+* # vi及其他基礎觀念 點擊這裡->[目錄2](#200)
   * ## [切換介面](#001) #
   * ## [系統目錄](#002) #
   * ## [基本指令操作(cal、pwd、whoami、--help)](#003) #
@@ -25,7 +26,11 @@
   * ## [awk](#029) #
   * ## [sed](#030) #
   * ## [grep](#031) #
+  
+  <h2 id="200">目錄(續)</h2> 
+
   * ## [vi](#032) #
+  
 
  ------
 <h2 id="001">切換介面Shell</h2>  
@@ -829,16 +834,18 @@ grep [參數] "pattern" file
 * #### **更多請參考鳥哥 :** [http://linux.vbird.org/linux_basic/0330regularex/0330regularex-fc4.php#grep](http://linux.vbird.org/linux_basic/0330regularex/0330regularex-fc4.php#grep)
 
 
-
 <h2 id="032">vi</h2> 
 
+* 指令模式  
 
-
-
-
-
-
-
+|指令|說明|
+| --- | --- |
+|h|help|
+|w|存檔|
+|w+檔名|另存新檔|
+|wq或zz或x|存檔並離開|
+|q!|強制離開|
+|5,9w|將第5到9行另存新檔|
 
 
 
