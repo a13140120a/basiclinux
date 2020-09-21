@@ -31,8 +31,8 @@
 
   * ## [vi](#032) #
   * ## [shell變數名稱語命名規則](#033) #
-  * ## [shell script(指令稿)](#034)
-  * 
+  * ## [shell script(指令稿)](#034) #
+  * ## [工作排程](#035) #
 
  ------
 <h2 id="001">切換介面Shell</h2>  
@@ -1044,10 +1044,29 @@ fi
 * [宣告變數()](http://linux.vbird.org/linux_basic/0320bash.php#declare)
 
 * function
-* #### **鳥哥，test :** [http://linux.vbird.org/linux_basic/0340bashshell-scripts.php#function](http://linux.vbird.org/linux_basic/0340bashshell-scripts.php#function)
+* #### **鳥哥 :** [http://linux.vbird.org/linux_basic/0340bashshell-scripts.php#function](http://linux.vbird.org/linux_basic/0340bashshell-scripts.php#function)
 
+<h2 id="035">工作排程</h2>   
+* ### at
+  * 只會執行一次
+  * `-m` 會寄email
+  * 範例:
+  ```js
+  at -m 3pm
+  at> echo hello
+  ```
+* `atrm 1` 將job1刪除
+* `atq` 檢視還剩下哪幾個工作
 
+* ### crontab
+  * 會重複一直執行
+  * 執行 `crontab -e`
+  * 分 時 日 月 周 身份 指令 
+  * 例如 0 9,11 * * * bash /home/user1/job1.sh  於每日9點及11點執行
+  * 例如 0 9-11 * * * bash /home/user1/job1.sh  於每日9點到11點執行
+  * */5 * * * * bash /home/user1/job1.sh 每5分鐘執行一次
 
+* #### **鳥哥 :** [http://linux.vbird.org/linux_basic/0430cron.php](http://linux.vbird.org/linux_basic/0430cron.php)
 
 
 
