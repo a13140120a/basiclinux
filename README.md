@@ -15,7 +15,7 @@
   * ## [echo,wc](#018) #
   * ## [which,type,file](#019) #
   * ## [alias](#020) #
-  * ## [find](#021) #
+  * ## [locate,find](#021) #
   * ## [>: 資料流倒出符號](#022) #
   * ## [pipe,tee](#023) #
   * ## [seq, sort](#024) #
@@ -488,7 +488,9 @@ file /bin/cp
   * 於# User specific aliases and functions 底下加上`alias cl="clear"`
   * 編輯完成之後執行 `source ~/.bashrc`
   * 成功把cl永久定義成clear指令
-## locate  檔案關鍵字  (搜尋檔案、目錄位置)
+  
+<h2 id="021">locate  檔案關鍵字  (搜尋檔案、目錄位置)</h2> 
+
 * **較快，但若未更新索引表，搜尋結果可能失真**
   * -更新索引表:以root身分執行`updatedb`
 * 在絕對路徑中出現user1字串的都會列出
@@ -507,7 +509,7 @@ locate -c user1
 ```js
 locate "*.img"
 ``` 
-<h2 id="021">find</h2>  
+<h2>find</h2>  
 
 * **翻硬碟搜尋檔案，速度較慢**
 * **搜尋路徑可為多個目錄**
