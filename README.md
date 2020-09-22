@@ -1,6 +1,6 @@
 # **linux(centos7) 入門攻略**  
 * # 目錄  
-* # vi及其他基礎觀念 點擊這裡->[目錄2](#200)
+* ### (vi及其他基礎 點擊這裡->[目錄2](#200))
   * ## [切換介面](#001) #
   * ## [系統目錄](#002) #
   * ## [基本指令操作(cal、pwd、whoami、--help)](#003) #
@@ -33,6 +33,9 @@
   * ## [shell變數名稱語命名規則](#033) #
   * ## [shell script(指令稿)](#034) #
   * ## [工作排程](#035) #
+  * ## [壓縮與備份](#036) #
+  * ## [帳號與群組管理](#037) #
+
 
  ------
 <h2 id="001">切換介面Shell</h2>  
@@ -1070,6 +1073,76 @@ fi
   * */5 * * * * bash /home/user1/job1.sh 每5分鐘執行一次
 
 * #### **鳥哥 :** [http://linux.vbird.org/linux_basic/0430cron.php](http://linux.vbird.org/linux_basic/0430cron.php)
+
+<h2 id="036">壓縮與備份</h2>   
+
+* 常見壓縮檔:
+
+|副檔名|說明|
+| --- | --- |
+|\*.tar|以tar程式打包的檔案，未壓縮|
+|\*.tar.gz(\*)|以tar程式打包檔案，並以gzip壓縮|
+|\*.tar.bz2|以tar程式打包檔案，並以bzip2壓縮|
+|\*.tar.xz|以tar程式打包檔案，並以xz壓縮|
+ 
+* 範例
+  * 壓縮後生成file1.xz，並刪除原始檔
+  ```js
+  xz file 
+  ```  
+  
+  * 壓縮後生成file1.xz，並保留原始檔
+  ```js
+  xz -k file
+  ```
+  * 解壓縮並刪除壓縮檔
+  ```js
+  xz -d file1.xz
+  ```
+
+* `tar` 用於將多個檔案合併為一個檔案，以利備份和壓縮
+  * 將 dir1 下所有檔案合併到test.tar
+```js
+tar -cf test.tar dir1
+```
+  * 再用gzip產生test.tar.gz
+  ```js
+  gzip test.tar
+  ```
+|選項|說明|
+| --- | --- |
+|-c|建立檔案|
+|-x|解開檔案|
+|-v|顯示過程|
+|-t|查看內容|
+|-f|被處理檔案名稱(一定要是最後一個參數)|
+|-z|由gzip處理|
+|-j|由bzip2處理|
+|-J|由xz處理|
+|-C|指定目的的路徑|
+
+* tar 配合壓縮與解壓縮範例  
+  * 把dir1打包然後壓縮成不同的壓縮檔格式  
+  `tar -zcf test.tar.gz dir1`  
+  `tar -zcf test.tgz dir1`  (tar.gz的縮寫)  
+  `tar -jcf test.tar.bz2 dir1`  
+  `tar -Jcf test.tar.xz dir1`  
+
+* 檢視壓縮檔內容物
+  `tar -tvf test.tar.gz`
+
+* 解開tar壓縮檔
+```js
+tar -zxf test.tar.gz
+tar -zxf test.tgz    (縮寫)
+tar -zxf test.tar.gz -C /tmp
+tar -jxf test.tar.bz2
+tar -Jxf test.tar.xz
+```
+
+<h2 id="037">帳號與群組管理</h2>   
+
+
 
 
 
