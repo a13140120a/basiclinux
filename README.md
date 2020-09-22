@@ -35,7 +35,7 @@
   * ## [工作排程](#035) #
   * ## [壓縮與備份](#036) #
   * ## [帳號與群組管理](#037) #
-
+  * ## [su/sudo](#038) #
 
  ------
 <h2 id="001">切換介面Shell</h2>  
@@ -1192,32 +1192,54 @@ tar -Jxf test.tar.xz
    **9.** 保留欄位  
    
 ----
-* **/etc/group :** 一行代表一個群組，以:分隔以下欄位  
+
+* **/etc/group :** 一行代表一個群組，以:分隔以下欄位 (預設任何人皆可檢視此檔案內容)  
    **1.** 群組名稱  
    **2.** 群組密碼，顯示x表示已改存於/etc/shadow     
    **3.** GID  
    **4.** 群組會員  
 ----
 
-* **/etc/gshadow :** 以:分隔以下欄位  
+* **/etc/gshadow :** 以:分隔以下欄位 (預設只有root或者shadow群組的帳號才可以檢視)   
    **1.** 群組名稱  
    **2.** 家密後的群組密碼     
    **3.** 群組管理員帳號  
    **4.** 群組會員  
+----  
+
+<h2 id="037">su、sudo</h2>  
+
+* 切換帳號  `su [帳號]`
+  * 需輸入新帳號的密碼
+  * 預設切換成root
+  * 切換後會產生子shell
+  * 返回原帳號用`exit`
+  * 
+   ```js
+   su root     (切換成root，但使用原帳號的環境變數設定與mail等等)
+   su - root   (切換成root，使用root的環境變數設定與mail等等)
+   exit
+   ```
 ----
-
-
-
-
-
-
-
-
-
-
-
-
-
+* `sudo [指令]`  
+  * 暫時使用root權限，執行完畢之後立即消失  
+  * 需使用目前帳號的密碼  
+  * 可利用sudo 執行updatedb更新檔案索引表  
+  * 只有寫於 /etc/sudoers設定黨內的帳號才可以使用sudo
+  * 以root權限執行visudo
+   ```js
+   ## Allow root to run any commands anywhere
+   root    ALL=(ALL)       ALL  #找到這行
+   user1   ALL=(ALL)       ALL  #加上這行使user1擁有使用sudo的權限
+   ```
+  * wheel 群組也可以使用sudo
+  ```js
+  ## Allows people in group wheel to run all commands
+  %wheel  ALL=(ALL)       ALL   #找到這行
+  ```
+    * 執行 `sudo usermod -G wheel user1` 將user1次要群組設定為wheel 
+    * 鳥哥: [usermod](http://linux.vbird.org/linux_basic/0410accountmanager.php#usermod)
+  * 切換成root帳號也可以使用`sudo -i ` 只需輸入原帳號的密碼(但是要再sudoer設定檔內)
 
 
 
