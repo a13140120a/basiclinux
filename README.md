@@ -36,6 +36,8 @@
   * ## [壓縮與備份](#036) #
   * ## [帳號與群組管理](#037) #
   * ## [su/sudo](#038) #
+  * ## [新增修改移除帳號及權限管理](#039) #
+
 
  ------
 <h2 id="001">切換介面Shell</h2>  
@@ -1235,11 +1237,185 @@ tar -Jxf test.tar.xz
   * wheel 群組也可以使用sudo
   ```js
   ## Allows people in group wheel to run all commands
-  %wheel  ALL=(ALL)       ALL   #找到這行
+  %wheel  ALL=(ALL)       ALL   
   ```
     * 執行 `sudo usermod -G wheel user1` 將user1次要群組設定為wheel 
     * 鳥哥: [usermod](http://linux.vbird.org/linux_basic/0410accountmanager.php#usermod)
-  * 切換成root帳號也可以使用`sudo -i ` 只需輸入原帳號的密碼(但是要再sudoer設定檔內)
+  * 切換成root帳號也可以使用`sudo -i ` 只需輸入原帳號的密碼(但是要再sudoer設定檔內)  
+----  
+<h2 id="039">新增修改移除帳號</h2>  
+
+* 更改密碼  
+  * 以root權限更改密碼就不會有密碼提示太簡單的問題
+   ```js
+  passwd [帳號]
+   sudo passwd [帳號] (以root權限更改密碼)
+   echo user1:1234|sudo chpasswd  (適合用於自動化腳本)
+   ```
+----  
+* 新增帳號  
+   ```js
+   useradd user3    #建立帳號後會自動建立同名群組
+   passwd user3     #建立密碼，若無建立密碼則無法登入
+   ```
+  * 建立多筆帳號script範例(密碼皆為12345)  
+   ```js
+   #!bin/bash
+   for((i=1;i<10;i++))
+   do
+    echo "Adding student""$i"
+    useradd student"$i"  #這邊建立帳號 
+    echo student"$i":12345|chpasswd  #修改密碼
+   done
+   ```  
+----  
+* 修改帳號  
+  * `usermod [option] [username]`
+
+|選項|說明|
+| --- | --- |
+|-u|設定新UID|
+|-d|設定家目錄|
+|-g|設定主要群組|
+|-G|設定次要群組|
+|-a|附加次要群組|
+|-L|鎖定帳號(無法登入)|
+|-U|解鎖帳號|  
+
+----
+* 移除帳號
+  * `userdel [帳號]`
+  * `userdel -r -f user3`  `-f` :強制移除帳號，`-r`: 刪除家目錄及其他檔案(例如信箱或工作排程)
+---- 
+* 新增修改移除群組(需root權限)  
+
+```js
+sudo groupadd group1           #新增group1
+sudo groupadd -g 1004 group2   #新增group2 並設定gid為1004
+sudo groupmod -g 1005          #修改group2 gid
+sudo groupmod -n group3        #修改group2 名稱為group3
+sudo group [groupname]         #刪除group (若仍有主要成員則無法刪除)
+```  
+----  
+
+* 查詢帳號資訊
+  * `users` :顯示目前登入的帳號，資訊較簡略
+  * `who` :顯示目前登入的帳號，較詳細
+  * `w [帳號(可不加)]` :只顯示目前入的指定帳號，資訊最完整
+
+  * 查詢帳號所屬群組
+  ```js 
+  [root@localhost ~]# groups user1
+  user1 : user1
+  groups [帳號] 
+  輸出: [帳號]: [主要群組] [次要群主]
+  ```  
+  * 印出帳號群組相關資訊
+  ```js
+  [root@localhost ~]# id user1
+  uid=1000(user1) gid=1000(user1) groups=1000(user1),10(wheel)
+  ```
+  * 列出每個帳號最近登入的時間  
+  ```js
+  lastlog
+  ```  
+  * 顯示系統登入紀錄
+  ```js
+  last -n 3    #顯示最近3筆紀錄
+  last user1   #只顯示user1登入紀錄
+  last reboot  #顯示重開機紀錄
+  ```
+---- 
+
+<h2>檔案管理權限</h2>  
+
+* 檢視檔案資訊
+```js
+-rwxrwxrwx.  1 root root   176 Dec 28  2013 .bashrc
+```
+  * 從左到右分別是檔案屬性、連結數、擁有者、群組、檔案大小，檔案最後存取日期，檔名  
+  * `-rwxrwxrwx.` :`-` 代表檔案類型(d為目錄，-為檔案)，前3個rwx為檔案擁有者屬性(可讀可寫可執行)，中間三個為檔按所屬群組之屬性，後三者為其他人對此檔案之屬性  
+  * 只有主要群組為第四欄位群組才有權限，若無則為後三個權限 (權限判斷是依據主要群組判斷)  
+
+* 變更檔案權限 (-R:遞迴)  
+  * [鳥哥chmod](http://linux.vbird.org/linux_basic/0210filepermission.php#chmod)  
+  * [鳥哥chown](http://linux.vbird.org/linux_basic/0210filepermission.php#chown)  
+  * [鳥哥chgrp](http://linux.vbird.org/linux_basic/0210filepermission.php#chgrp)  
+
+
+<h2 id="040">前景及背景</h2>   
+  
+* 執行中的程式按`ctrl + z` 暫停並丟到背景  
+* 輸入`jobs` 查看背景程序狀態  
+  * `-l` 列出jobnumber 指令與PID  
+  * `-r` 列出正在背景執行的程序  
+  * `-s` 列出正在背景暫停的程序  
+* 輸入`ps` 會同時看到背景及前景的狀態  
+* 使用 `fg %n` 將第n個程序切換到前景執行
+* 使用 `bg %n` 讓第n個job(程序)於背景執行
+* 使用`kill [-信號] PID` 終止程序
+  * 先查出PID(firefox): `ps aux|grex firefox`
+  
+  |編號|意義|
+  | --- | --- |
+  |-2|ctrl + c|
+  |-9|強制刪除process|
+  |-15(預設)|以正常程序通知程式停止|
+  
+  * 範例:
+  ```js
+  kill 12345
+  kill -9 12345
+  ```
+* `xkill` 用滑鼠點擊視窗來刪除程序
+
+* 補充:
+  * `ping www.google.com` 發送封包，測試連線
+  * `ping -c 3 www.google.com` 只發送3次
+  * `nslookup [網址/ip]` 用ip/主機 查詢 ip/主機(網址)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
