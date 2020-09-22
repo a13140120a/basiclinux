@@ -751,7 +751,7 @@ awk -F '{pattern   action}' filename   注意:大括號{}必須要使用單引�
 ```JS
 awk '{/match_pattern/print $1}' filename.txt
 ```  
-* 不印出第一列以及第一  
+* 不印出第一列以及第一行
 ```js
 awk 'NR!=1{print $1}' file
 ```  
@@ -762,7 +762,7 @@ $ awk '$0 ~ /root/{print}' file
 
 * 印第一行不含 `root` 的列  
 ```js
-awk -F, '$1 !~ /Deepak/' file 
+awk -F, '$1 !~ /root/' file 
 ```   
 * 更多詳細資訊:
   * [https://codertw.com/%E5%89%8D%E7%AB%AF%E9%96%8B%E7%99%BC/392291/](https://codertw.com/%E5%89%8D%E7%AB%AF%E9%96%8B%E7%99%BC/392291/)  
