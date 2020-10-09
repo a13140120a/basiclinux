@@ -1412,6 +1412,9 @@ sudo group [groupname]         #刪除group (若仍有主要成員則無法刪�
   sudo ufw allow 80/tcp   或 sudo ufw allow http   #開啟80port(就是http)
   sudo ufw allow 443/tcp  或 sudo ufw allow https  #開啟443port(就是https)
   ```
+  ```js
+  sudo ufw allow from 127.0.0.1 to any port 22   #只允許特定ip連接 22port(例如 127.0.0.1)
+  ```
 
 
 
