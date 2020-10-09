@@ -1376,8 +1376,19 @@ sudo group [groupname]         #刪除group (若仍有主要成員則無法刪�
   * `ping -c 3 www.google.com` 只發送3次
   * `nslookup [網址/ip]` 用ip/主機 查詢 ip/主機(網址)
 
-
-
+* 補充ssh:
+  * 有時候會出現connection refuse
+  這時候可以輸入以下指令查看
+  ```js
+  master@ubuntu:~/Desktop$ sudo service ssh restart
+  Failed to restart ssh.service: Unit ssh.service not found.
+  ```
+  * 代表沒有安裝ssh (ubuntu預設不會安裝)
+  * 執行以下指令
+  ```js
+  sudo apt-get install ssh
+  ```
+  
 
 
 
