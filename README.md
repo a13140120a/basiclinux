@@ -1419,10 +1419,7 @@ sudo group [groupname]         #刪除group (若仍有主要成員則無法刪�
   * 出現permission denied
   * 解決方法:
   1. 登入root
-  2. 修改權限到777 (不安全)
-  ```js
-  sudo chmod 777 /home
-  ```
+  2. 修改權限到777 (不安全)`sudo chmod 777 /home`
   3. 先scp到/tmp目錄  (一定可以，因為/tmp是用來放公共資料的地方)
 
 
