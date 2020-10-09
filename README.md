@@ -1375,12 +1375,11 @@ sudo group [groupname]         #刪除group (若仍有主要成員則無法刪�
 
 <h2 id="041">ssh與防火牆設置</h2>  
 
-* 補充:
-  * `ping www.google.com` 發送封包，測試連線
-  * `ping -c 3 www.google.com` 只發送3次
-  * `nslookup [網址/ip]` 用ip/主機 查詢 ip/主機(網址)
+* `ping www.google.com` 發送封包，測試連線  
+* `ping -c 3 www.google.com` 只發送3次  
+* `nslookup [網址/ip]` 用ip/主機 查詢 ip/主機(網址)  
 
-* 補充ssh:
+* ssh:
   * 有時候會出現connection refuse
   這時候可以輸入以下指令查看
   ```js
@@ -1392,14 +1391,27 @@ sudo group [groupname]         #刪除group (若仍有主要成員則無法刪�
   ```js
   sudo apt-get install ssh
   ```
-  
-
-
-
-
-
-
-
+* 防火牆
+  * 查看防火牆狀態
+  ```js
+  sudo ufw status
+  ```
+  * 關閉防火牆
+  ```js
+  sudo ufw disable
+  ```
+  * 開啟防火牆
+  ```js
+  sudo ufw enable
+  ```
+  * 開啟port
+  ```js
+  sudo ufw allow 22/tcp   #開啟22port(ssh預設22port)
+  ```
+  ```js
+  sudo ufw allow 80/tcp   或 sudo ufw allow http   #開啟80port(就是http)
+  sudo ufw allow 443/tcp  或 sudo ufw allow https  #開啟443port(就是https)
+  ```
 
 
 
