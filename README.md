@@ -1422,7 +1422,13 @@ sudo group [groupname]         #刪除group (若仍有主要成員則無法刪�
   2. 修改權限到777 (不安全)`sudo chmod 777 /home`
   3. 先scp到/tmp目錄  (一定可以，因為/tmp是用來放公共資料的地方)
 
-
+* 修改ip
+* eth1為網路介面
+* 192.168.xxx.x是靜態ip
+* 255.255.xxx.x 遮罩
+  ```js
+  ifconfig eth1 192.168.xxx.x netmask 255.255.xxx.x
+  ```
 
 
 
