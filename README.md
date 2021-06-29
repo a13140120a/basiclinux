@@ -1430,7 +1430,7 @@ sudo group [groupname]         #刪除group (若仍有主要成員則無法刪�
   ifconfig eth1 192.168.xxx.x netmask 255.255.xxx.x
   ```
 
-
+* [簡易網路概念](http://dns-learning.twnic.net.tw/internet/toc.html)
 
 
 
