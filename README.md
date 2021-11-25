@@ -757,7 +757,7 @@ awk '{/match_pattern/print $1}' filename.txt
 ```js
 awk 'NR!=1{print $1}' file
 ```  
-* 只印含有`root`字元的列
+* 只印包含`root`字元的列
 ```js
 $ awk '$0 ~ /root/{print}' file
 ```  
