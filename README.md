@@ -174,7 +174,7 @@
     ```js
     ls -t
     ```
-  * 
+  * [ls -l 檔案型態](https://qastack.cn/ubuntu/919952/what-does-the-s-in-srwxr-xr-x-in-the-ls-output-mean)
 <h2 id="006">清除畫面(clear,reset)</h2>  
 
 * 可以往上捲動  
