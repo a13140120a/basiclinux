@@ -845,6 +845,10 @@ grep [參數] "pattern" file
     ```js
     history | grep "is"
     ```
+  * 在dir 目錄下遞迴查詢所有.cpp檔案中的關鍵字key
+    ```js
+    grep -R --include="*.cpp" key dir
+    ```
 * #### **鳥哥 :** [http://linux.vbird.org/linux_basic/0330regularex/0330regularex-fc4.php#grep](http://linux.vbird.org/linux_basic/0330regularex/0330regularex-fc4.php#grep)
 
 
