@@ -554,6 +554,10 @@ locate "*.img"
     ```js
     find . -empty -type d
     ``` 
+  * 找出當前目錄下所有名稱包含activities的目錄
+      ```js
+    find . -name 'activit*' -type d
+    ```
 * 搭配exec:  
   * 找出所有大於500MB的檔案並刪除  `{}`為搜尋結果  
     ```js
